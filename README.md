@@ -9,15 +9,15 @@
 #### 2. 目录
 
 - [快速开始](#3- 快速开始)
-- [数据集](https://tongyi.aliyun.com/?sessionId=a6682d0304214a9f80458a491c786380#4-数据集)
-- [实验设置](https://tongyi.aliyun.com/?sessionId=a6682d0304214a9f80458a491c786380#5-实验设置)
-- [量化算法](https://tongyi.aliyun.com/?sessionId=a6682d0304214a9f80458a491c786380#6-量化算法)
-- [实验结果](https://tongyi.aliyun.com/?sessionId=a6682d0304214a9f80458a491c786380#7-实验结果)
-- [文件结构](https://tongyi.aliyun.com/?sessionId=a6682d0304214a9f80458a491c786380#8-文件结构)
-- [贡献者指南](https://tongyi.aliyun.com/?sessionId=a6682d0304214a9f80458a491c786380#9-贡献者指南)
-- [许可证](https://tongyi.aliyun.com/?sessionId=a6682d0304214a9f80458a491c786380#10-许可证)
-- [致谢](https://tongyi.aliyun.com/?sessionId=a6682d0304214a9f80458a491c786380#11-致谢)
-- [联系信息](https://tongyi.aliyun.com/?sessionId=a6682d0304214a9f80458a491c786380#12-联系信息)
+- [数据集](#4-数据集)
+- [实验设置](#5-实验设置)
+- [量化算法](#6-量化算法)
+- [实验结果](#7-实验结果)
+- [文件结构](#8-文件结构)
+- [贡献者指南](9-贡献者指南)
+- [许可证](#10-许可证)
+- [致谢](#11-致谢)
+- [联系信息](#12-联系信息)
 
 #### 3. 快速开始
 
