@@ -112,6 +112,12 @@ class AGIEval(BaseDatasetProcessor):
                     processed.append(new_instance.to_dict())
                 self._dataset[dataset_name]=processed
 
+                cache_root = os.path.join("experiments/cache", self.setting)
+                os.makedirs(cache_root, exist_ok=True)
+                with open(os.path.join(cache_root,"{}.json".format(dataset_name)),"w",encoding="utf-8") as ft:
+                    json_data = json.dumps(processed,ensure_ascii=False,indent=4)
+                    ft.write(json_data)
+
 
         elif self.setting == "zero-shot-CoT":
             for dataset_name, datas in self._dataset.items():
@@ -122,6 +128,11 @@ class AGIEval(BaseDatasetProcessor):
 
                     processed.append(new_instance.to_dict())
                 self._dataset[dataset_name] = processed
+                cache_root = os.path.join("experiments/cache", self.setting)
+                os.makedirs(cache_root, exist_ok=True)
+                with open(os.path.join(cache_root,"{}.json".format(dataset_name)),"w",encoding="utf-8") as ft:
+                    json_data = json.dumps(processed,ensure_ascii=False,indent=4)
+                    ft.write(json_data)
 
         else:
             pass
