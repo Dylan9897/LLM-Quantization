@@ -7,7 +7,7 @@ parser.add_argument("--prompt_type",default=None,type=str,help="choose an instru
 parser.add_argument("--chat_mode",default=True,type=bool,help="")
 parser.add_argument("--model",default="qwen",type=str,help="choose an LLM model")
 parser.add_argument("--report",default=False,type=bool,help="Generate report or not")
-parser.add_argument("--setting",default='few-shot',type=str,help="choose an reasoning mode ['few-shot','few-shot-CoT','zero-shot','zero-shot-CoT']")
+parser.add_argument("--setting",default='few-shot-CoT',type=str,help="choose an reasoning mode ['few-shot','few-shot-CoT','zero-shot','zero-shot-CoT']")
 args = parser.parse_args()
 
 if __name__ == '__main__':
