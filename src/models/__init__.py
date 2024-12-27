@@ -1,0 +1,1 @@
+from .ModelBase import BaseModelInference,InputTypeError

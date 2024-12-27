@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
 import logging
 
+class InputTypeError(TypeError):
+    """Custom exception for unsupported input types."""
+    ...
 
 class BaseModelInference(ABC):
     def __init__(self, model_path, config=None):
@@ -13,6 +16,7 @@ class BaseModelInference(ABC):
         self.model_path = model_path
         self.config = config or {}
         self._model = None
+        self._tokenizer = None
         self.logger = logging.getLogger(self.__class__.__name__)
         self.load_model()
 
