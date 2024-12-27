@@ -19,7 +19,7 @@ class BaseModelInference(ABC):
     @abstractmethod
     def load_model(self):
         """加载模型的具体实现由子类完成"""
-        pass
+        ...
 
     @abstractmethod
     def preprocess(self, input_data):
@@ -29,7 +29,7 @@ class BaseModelInference(ABC):
         :param input_data: 输入的数据，类型取决于具体应用
         :return: 预处理后的数据，准备传递给模型
         """
-        pass
+        ...
 
     @abstractmethod
     def postprocess(self, raw_output):
@@ -39,7 +39,7 @@ class BaseModelInference(ABC):
         :param raw_output: 模型生成的原始输出
         :return: 处理后的最终输出结果
         """
-        pass
+        ...
 
     def infer_non_streaming(self, input_data):
         """
