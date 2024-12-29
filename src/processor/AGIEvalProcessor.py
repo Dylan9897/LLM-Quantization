@@ -248,6 +248,14 @@ class AGIEval(BaseDatasetProcessor):
 
 
     def combine_prompt(self):
+        target_path = "{}-chat".format(self.setting) if self.chat_mode else self.setting
+        cache_root = os.path.join("experiments/cache", target_path)
+        if not os.path.exists(cache_root) or not os.path.isdir(cache_root):
+            # 如果不存在，则创建目录
+            os.makedirs(cache_root)
+        else:
+            # 如果目录已经存在，则跳过创建
+            print(f"Directory '{cache_root}' already exists, skipping creation.")
         if self.setting == "zero-shot":
             for dataset_name,datas in self._dataset.items():
                 processed = []
@@ -257,9 +265,6 @@ class AGIEval(BaseDatasetProcessor):
 
                     processed.append(new_instance.to_dict())
                 self._dataset[dataset_name]=processed
-
-                cache_root = os.path.join("experiments/cache", self.setting)
-                os.makedirs(cache_root, exist_ok=True)
                 with open(os.path.join(cache_root,"{}.json".format(dataset_name)),"w",encoding="utf-8") as ft:
                     json_data = json.dumps(processed,ensure_ascii=False,indent=4)
                     ft.write(json_data)
@@ -274,13 +279,12 @@ class AGIEval(BaseDatasetProcessor):
 
                     processed.append(new_instance.to_dict())
                 self._dataset[dataset_name] = processed
-                cache_root = os.path.join("experiments/cache", self.setting)
-                os.makedirs(cache_root, exist_ok=True)
                 with open(os.path.join(cache_root,"{}.json".format(dataset_name)),"w",encoding="utf-8") as ft:
                     json_data = json.dumps(processed,ensure_ascii=False,indent=4)
                     ft.write(json_data)
 
         else:
+            
             for dataset_name, datas in self._dataset.items():
                 processed_demos = self.concat_prompt(dataset_name)
                 if self.chat_mode:
@@ -299,8 +303,7 @@ class AGIEval(BaseDatasetProcessor):
                     processed.append(new_instance.to_dict())
 
                 self._dataset[dataset_name] = processed
-                cache_root = os.path.join("experiments/cache", self.setting)
-                os.makedirs(cache_root, exist_ok=True)
+
                 with open(os.path.join(cache_root, "{}.json".format(dataset_name)), "w", encoding="utf-8") as ft:
                     json_data = json.dumps(processed, ensure_ascii=False, indent=4)
                     ft.write(json_data)

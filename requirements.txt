@@ -1,1 +1,5 @@
+pandas
+tiktoken
 modelscope
+transformers
+accelerate>=0.26.0
