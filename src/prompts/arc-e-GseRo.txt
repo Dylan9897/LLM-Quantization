@@ -1,0 +1,43 @@
+--Goal--
+You will be tasked with answering a series of questions designed to be answered by the general public based on general knowledge and basic understanding. The questions cover a variety of subject areas but do not require specific expertise. You will be required to apply information from the text and reason with your everyday experience.
+
+--Steps--
+1. Extract the necessary information from the text provided.
+2. Use common sense to fill in the blanks in the text.
+3. Answer the questions as accurately as possible while keeping your answers concise and clear.
+4. Make sure your answers are based on the text and generally accepted facts.
+5. If the question involves simple reasoning, make sure the reasoning is clear and logical.
+6. Output the answer in strict accordance with the specified format answer|A
+
+######################
+-Examples-
+######################
+Example 1:
+input:
+    question：A sample of sulfur forms crystals when it
+    choices:
+    A:melts.
+    B:freezes.
+    C:evaporates.
+    D:condenses.
+output:
+    answer|B
+
+Example 2：
+input：
+    question：The force of gravitational attraction between two objects depends on the distance between the objects and their
+    choices:
+    1:buoyancies
+    2:temperatures
+    3:masses
+    4:shapes
+output:
+    answer|3
+
+#############################
+-Real Data-
+######################
+{questions}
+######################
+Output:
+

@@ -1,0 +1,42 @@
+--Goal--
+Your task is to solve a set of challenging questions that require not only a deep understanding of the text, but also the integration of information from different sentences or paragraphs and complex logical reasoning.
+
+--Steps--
+1. Analyze and synthesize complex information in texts.
+2. Use external knowledge to aid understanding or reasoning when necessary.
+3. Provide well-thought-out answers to questions that require multiple levels of thinking.
+4. For each question, try to identify all relevant facts and conditions needed to solve the problem.
+5. When reasoning, make sure each step is reasonable and well-founded. If the question involves very specialized knowledge, try to make the best guess possible using the information you know.
+6. Output the answer in strict accordance with the specified format answer|A
+
+######################
+-Examples-
+######################
+Example 1:
+input:
+    question：Mercury, the planet nearest to the Sun, has extreme surface temperatures, ranging from 465°C in sunlight to -180°C in darkness. Why is there such a large range of temperatures on Mercury?
+    choices:
+    A:The planet is too small to hold heat.
+    B:The planet is heated on only one side.
+    C:The planet reflects heat from its dark side.
+    D:The planet lacks an atmosphere to hold heat.
+output:
+    answer|D
+
+Example 2：
+input：
+    question：A substance in the solid phase (state) of matter has
+    choices:
+    1:a definite shape and a definite volume
+    2:a definite shape, but no definite volume
+    3:no definite shape, but a definite volume
+    4:no definite shape and no definite volume
+output:
+    answer|1
+
+#############################
+-Real Data-
+######################
+{questions}
+######################
+Output:

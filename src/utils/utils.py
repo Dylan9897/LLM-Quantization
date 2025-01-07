@@ -12,3 +12,7 @@ def read_jsonl(file):
 def read_json(file):
     with open(file,"r",encoding="utf-8") as fl:
         return json.load(fl)
+
+def read_txt(file):
+    with open(file,"r",encoding="utf-8") as fl:
+        return fl.read()
