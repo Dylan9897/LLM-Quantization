@@ -51,7 +51,7 @@ class ARC(BaseDatasetProcessor):
         choices = "\n".join([unit["label"]+":"+unit["text"] for unit in params["choices"]])
         return target + choices
 
-    def concat_prompt(self):
+    def combine_prompt(self):
         for k,v in self._dataset.items():
             if k.startswith("ARC-c"):
                 prompt = self._prompts["arc-c"]

@@ -41,12 +41,6 @@ def inference(args):
                 ft.write(json_data)
 
 
-
-
-        
-
-
-
 if __name__ == "__main__":
     func = QwenModel(
         model_path="ckpt/Qwen2___5-14B-Instruct"
