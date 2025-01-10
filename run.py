@@ -1,7 +1,7 @@
 import argparse
 
 parser = argparse.ArgumentParser(description="LLM reasoning and quantitative evaluation ...")
-parser.add_argument("--dataset",default="BBH",type=str)
+parser.add_argument("--dataset",default="ceval",type=str)
 parser.add_argument("--quantize",default=None,type=str,help="choose an Quantization Algorithm")
 parser.add_argument("--prompt_type",default=None,type=str,help="choose an instruction type")
 parser.add_argument("--chat_mode",default=False,type=bool,help="")
@@ -26,4 +26,9 @@ if __name__ == '__main__':
     elif args.dataset == "BBH":
         from src.processor.BBHProcessor import BBH
         func = BBH(args)
+        func.combine_prompt()
+
+    elif args.dataset == "ceval":
+        from src.processor.CevalProcessor import CEVAL
+        func = CEVAL(args)
         func.combine_prompt()
