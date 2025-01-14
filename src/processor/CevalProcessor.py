@@ -80,7 +80,7 @@ class CEVAL(BaseDatasetProcessor):
                     line = df.loc[i]
                     question = line["question"]
                     options = [
-                        "(A) "+line["A"],
+                        "(A) " + line["A"],
                         "(B) " + line["B"],
                         "(C) " + line["C"],
                         "(D) " + line["D"],

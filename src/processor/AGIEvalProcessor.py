@@ -1,5 +1,6 @@
 import os
 import json
+import random
 
 import pandas as pd
 import ast
@@ -7,6 +8,8 @@ import tiktoken
 from src.processor import BaseDatasetProcessor,ChatGPTSchema
 from src.utils.utils import read_jsonl
 from src.utils.config import AGIEvalMappings
+from src.prompts import AGIEval as prompts_mapping
+
 
 class AGIEval(BaseDatasetProcessor):
     def __init__(self,args):
@@ -304,7 +307,6 @@ class AGIEval(BaseDatasetProcessor):
                     chosen_prompt, n_shot = self.concat_prompt_chat_mode(
                         processed_demos, dataset_name, max_tokens=2048, end_of_example="<END>\n", verbose=False)
 
-
                 else:
                     chosen_prompt, n_shot = self.concat_data_prompt(
                         processed_demos, dataset_name, max_tokens=2048, end_of_example="<END>\n", verbose=False)
@@ -321,3 +323,170 @@ class AGIEval(BaseDatasetProcessor):
                     json_data = json.dumps(processed, ensure_ascii=False, indent=4)
                     ft.write(json_data)
 
+
+    def concat_CseRo_prompt(self,dataset_name):
+        load_explanation = self.setting == 'few-shot-CoT'
+        chat_mode = self.chat_mode
+        skip_passage = False
+        if dataset_name == 'sat-en-without-passage':
+            skip_passage = True
+            dataset_name = "sat-en"
+        demostrations = []
+        # read the prompts by context and explanation
+        context_row = [0, 1, 3, 5, 7, 9]
+        # 解释
+        explanation_row = [0, 2, 4, 6, 8, 10]
+
+        # saamples 行
+        raw_prompts_context = pd.read_csv(self._prompts, header=0, skiprows=lambda x: x not in context_row,
+                                          keep_default_na=False)
+
+        # explan 行
+        raw_prompts_explanation = pd.read_csv(self._prompts, header=0, skiprows=lambda x: x not in explanation_row,
+                                              keep_default_na=False).replace(r'\n\n', '\n', regex=True)
+
+        contexts = []
+        for line in list(raw_prompts_context[dataset_name]):
+            if line:
+                contexts.append(ast.literal_eval(line))
+
+        ##################################################
+
+        explanations = [exp for exp in raw_prompts_explanation[dataset_name] if exp]
+        contexts = random.sample(contexts,2)
+        explanations = random.sample(explanations,2)
+        instruction = ""
+        for idx, (con, exp) in enumerate(zip(contexts, explanations)):
+
+            passage = con["passage"] if con["passage"] is not None and not skip_passage else ""
+            question = con["question"]
+            options = con["options"] if con["options"] is not None else ""
+            label = con["label"] if con["label"] is not None else ""
+            answer = con["answer"] if "answer" in con and con["answer"] is not None else ""
+
+            if dataset_name in AGIEvalMappings["english_qa_datasets"]:
+                if idx == 0:
+                    instruction += "--Goal--"+"\n\n"
+                    description = prompts_mapping.descrips[dataset_name]
+
+                    instruction += prompts_mapping.en_prefix.format(description=description)+"\n"
+
+                    instruction += prompts_mapping.en_steps+"\n"
+
+                    instruction += "--Examples--"+"\n"
+
+                question_input = "Problem {}   ".format(idx + 1) + "\n" + passage + " " + question + "\n" \
+                                 + "Choose from the following options:    " + " ".join(options) + "\n"
+                question_output = "answer|{}".format(label)+ "\n"+(("Explanation for Problem {}:   ".format(
+                    idx + 1) + exp + "\n") if load_explanation else "")
+
+                instruction+=question_input + "\n" + question_output
+
+            elif dataset_name in AGIEvalMappings["chinese_qa_datasets"]:
+                if idx == 0:
+                    instruction += "--Goal--"+"\n\n"
+                    description = prompts_mapping.descrips[dataset_name]
+
+                    instruction += prompts_mapping.zh_prefix.format(description=description)+"\n"
+
+                    instruction += prompts_mapping.zh_steps+"\n"
+
+                    instruction += "--Examples--"+"\n"
+
+                question_input = "问题 {}.   ".format(idx + 1) + "\n" + passage + " " + question + "\n" \
+                                 + "从以下选项中选择:    " + " ".join(options) + "\n"
+                question_output = "answer|{}".format(label)+ "\n"+(("问题 {}的解析:   ".format(idx + 1) + exp + "\n") if load_explanation else "")
+                instruction += question_input + "\n" + question_output
+
+
+            elif dataset_name in AGIEvalMappings["english_cloze_datasets"]:
+                if idx == 0:
+                    instruction += "--Goal--"+"\n\n"
+                    description = prompts_mapping.descrips[dataset_name]
+
+                    instruction += prompts_mapping.en_prefix.format(description=description)+"\n"
+
+                    instruction += prompts_mapping.en_steps+"\n"
+
+                    instruction += "--Examples--"+"\n"
+
+                question_input = "Problem {}.   ".format(idx + 1) + question + "\n"
+                question_output = "answer|{}".format(answer)+"\n"+(("Explanation for Problem {}:   ".format(
+                    idx + 1) + exp + "\n") if load_explanation else "")
+                instruction += question_input + "\n" + question_output
+
+            elif dataset_name in AGIEvalMappings["chinese_cloze_datasets"]:
+                if idx == 0:
+                    instruction += "--Goal--"+"\n\n"
+                    description = prompts_mapping.descrips[dataset_name]
+
+                    instruction += prompts_mapping.zh_prefix.format(description=description)+"\n"
+
+                    instruction += prompts_mapping.zh_steps+"\n"
+
+                    instruction += "--Examples--"+"\n"
+
+                question_input = "问题 {}.   ".format(idx + 1) + question + "\n"
+                question_output = "answer|{}".format(answer)+"\n"+(("问题 {}的解析:   ".format(idx + 1) + exp + "\n") if load_explanation else "")
+                instruction += question_input + "\n" + question_output
+            else:
+                raise ValueError(f"During loading few-sot examples, found unknown dataset: {dataset_name}")
+
+        return instruction
+
+    def convert_CseRo_few_shot(self,prefix,line, dataset_name):
+        prefix += """
+        #########################
+        --Real data--
+        #########################
+        """
+        passage = line["passage"] if line["passage"] is not None else ""
+        question = line["question"]
+        options = line["options"] if line["options"] is not None else ""
+
+        if dataset_name in AGIEvalMappings["english_qa_datasets"]:
+            question_input = "Problem: "+"\n" + passage + " " + question + "\n" \
+                             + "Choose from the following options:    " + " ".join(options) + "\n"
+            # + "Explanation for Problem {}:   ".format(n_shot + 1)
+
+        if dataset_name in AGIEvalMappings["chinese_qa_datasets"]:
+            question_input = "问题：  "+"\n" + passage + " " + question + "\n" \
+                             + "从以下选项中选择:    " + " ".join(options) + "\n"
+            # + "问题 {}的解析:   ".format(n_shot + 1)
+
+        if dataset_name in AGIEvalMappings["english_cloze_datasets"]:
+            question_input = "Problem:   "+"\n" + question + "\n"
+            # + "Explanation for Problem {}:   ".format(n_shot + 1)
+
+        if dataset_name in AGIEvalMappings["chinese_cloze_datasets"]:
+            question_input = "问题:   "+"\n" + question + "\n"
+            # + "问题 {}的解析:   ".format(n_shot + 1)
+
+        return prefix + question_input
+
+    def combine_CseRo_prompt(self):
+
+        cache_root = "experiments/cache/AGIEval/GseRo"
+
+        if not os.path.exists(cache_root) or not os.path.isdir(cache_root):
+            # 如果不存在，则创建目录
+            os.makedirs(cache_root)
+        else:
+            # 如果目录已经存在，则跳过创建
+            print(f"Directory '{cache_root}' already exists, skipping creation.")
+
+        for dataset_name, datas in self._dataset.items():
+            processed = []
+            processed_demos = self.concat_CseRo_prompt(dataset_name)
+
+            for meta_idx, line in enumerate(datas):
+                ctxt = self.convert_CseRo_few_shot(processed_demos,line, dataset_name)
+                new_instance = ChatGPTSchema(context=ctxt, dataset_name=dataset_name, metadata=meta_idx)
+
+                processed.append(new_instance.to_dict())
+
+            self._dataset[dataset_name] = processed
+
+            with open(os.path.join(cache_root, "{}.json".format(dataset_name)), "w", encoding="utf-8") as ft:
+                json_data = json.dumps(processed, ensure_ascii=False, indent=4)
+                ft.write(json_data)
