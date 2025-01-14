@@ -10,6 +10,7 @@ class BBH(BaseDatasetProcessor):
         self._prompts = {}
         self.load_dataset()
         self.load_prompts()
+        self.args = args
 
     def load_dataset(self):
         """
@@ -78,6 +79,27 @@ Output:
                 ] = instruction
 
     def combine_prompt(self):
+
+        if self.args.chat_mode:
+
+            cache_root = "experiments/cache/{dataset}/{settings}/{chat_mode}".format(
+                dataset=self.args.dataset,
+                settings = self.args.setting,
+                chat_mode = self.args.chat_mode
+            )
+        else:
+            cache_root = "experiments/cache/{dataset}/{settings}".format(
+                dataset=self.args.dataset,
+                settings = self.args.setting
+            )
+
+        if not os.path.exists(cache_root) or not os.path.isdir(cache_root):
+            # 如果不存在，则创建目录
+            os.makedirs(cache_root)
+        else:
+            # 如果目录已经存在，则跳过创建
+            print(f"Directory '{cache_root}' already exists, skipping creation.")
+
         for k, v in self._dataset.items():
             instruction = self._prompts[k]
             result = []
@@ -97,9 +119,11 @@ Output:
                         "metadata": i
                     }
                 result.append(data)
-            with open("experiments/cache/{}/{}.json".format(self.dataset,k), "w", encoding="utf-8") as ft:
+
+            with open(os.path.join(cache_root, "{}.json".format(k)), "w", encoding="utf-8") as ft:
                 json_data = json.dumps(result, ensure_ascii=False, indent=4)
                 ft.write(json_data)
+
 
 
 
