@@ -1,12 +1,16 @@
 import json
 import os
 import pandas as pd
+import random
 from src.processor import BaseDatasetProcessor,ChatGPTSchema
 from src.utils.utils import read_jsonl,read_txt
+from src.prompts import AGIEval as prompts_mapping
+
 
 class CEVAL(BaseDatasetProcessor):
     def __init__(self,args):
         super().__init__(args=args)
+        self.args = args
         self._dataset = {}
         self._prompts = {}
         self.load_dataset()
@@ -70,9 +74,11 @@ class CEVAL(BaseDatasetProcessor):
         dataset_path = self.config.get(self.dataset, "data_path")
         if os.path.isdir(dataset_path):
             file_list = os.listdir(dataset_path)
-            cache = {}
+            # cache = {}
             for file in file_list:
-                cache[file[:-8]]= ""
+                if not file.endswith("csv"):
+                    continue
+                # cache[file[:-8]]= ""
                 file_path = os.path.join(dataset_path,file)
                 df = pd.read_csv(file_path)
                 cur_data = []
@@ -95,7 +101,7 @@ class CEVAL(BaseDatasetProcessor):
                     )
 
                 self._dataset[file[:-4]] = cur_data
-            print(json.dumps(cache,ensure_ascii=False,indent=4))
+            # print(json.dumps(cache,ensure_ascii=False,indent=4))
         else:
             print(f"数据集文件不存在或未设置：{self.dataset_path}")
 
@@ -106,12 +112,90 @@ class CEVAL(BaseDatasetProcessor):
             for file in file_list:
                 file_path = os.path.join(dataset_path, file)
                 df = pd.read_csv(file_path)
-                self._prompts[file[:-4]] = df
+                self._prompts[file[:-8]] = df
         else:
             print(f"提示词文件不存在或未设置：{self.dataset_path}")
 
-    # def combine_prompt(self):
-    #     config_df = pd.read_excel("src/ceval.xlsx")
+    def prepare_prompt(self,data):
+        examples = []
+        for i in data.index:
+            line = data.loc[i]
+            example = "question{}: ".format(i+1)+line["question"] + "\n"
+            example+= "options:"+"\n"
+            for tag in ["A","B","C","D"]:
+                example+="  ({}) ".format(tag) + line[tag]
+
+            example += "output:" + "\n" + "answer|{}".format(line["answer"])
+            examples.append(example)
+
+        return examples[:2]
+
+    def combine_prompt(self):
+        if self.args.chat_mode:
+
+            cache_root = "experiments/cache/{dataset}/{settings}/{chat_mode}".format(
+                dataset=self.args.dataset,
+                settings = self.args.setting,
+                chat_mode = self.args.chat_mode
+            )
+        else:
+            cache_root = "experiments/cache/{dataset}/{settings}".format(
+                dataset=self.args.dataset,
+                settings = self.args.setting
+            )
+
+        if not os.path.exists(cache_root) or not os.path.isdir(cache_root):
+            # 如果不存在，则创建目录
+            os.makedirs(cache_root)
+
+        # print(self._prompts.keys())
+        for dataset_name,data in self._dataset.items():
+            description = self.config[dataset_name[:-4]]
+            # print(f"dataset is {dataset_name}, description is {description}")
+
+            prompt_df = self._prompts[dataset_name[:-4]]
+            prompts = self.prepare_prompt(prompt_df)
+
+            cur_result = []
+            for idx,line in enumerate(data):
+                instruction = "--Goal--"+"\n" + prompts_mapping.zh_prefix.format(description=description)+"\n"
+                instruction += "--steps--" + "\n" + prompts_mapping.zh_steps + "\n"
+
+                instruction += """
+                ######################
+                --Examples--
+                ######################
+                """
+
+                instruction += "\n".join(prompts)
+
+                instruction+="""
+                ######################
+                --Real Data--
+                ######################
+                """
+
+                instruction += "question: "+line["question"]
+
+                instruction += "options:"+"\n"
+
+                instruction += "  \n".join(line["options"])
+
+                instruction += "\noutput:"
+
+                cur_result.append(
+                    {
+                        "metadata":idx+1,
+                        "context":instruction,
+                        "dataset":dataset_name[:-4]
+                    }
+                )
+            with open(os.path.join(cache_root,"{}.json".format(dataset_name[:-4])),"w",encoding="utf-8") as ft:
+                json_data = json.dumps(cur_result,ensure_ascii=False,indent=4)
+                ft.write(json_data)
+
+
+
 
 
 
