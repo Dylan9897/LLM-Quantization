@@ -6,6 +6,7 @@ from src.utils.utils import read_jsonl,read_txt
 class ARC(BaseDatasetProcessor):
     def __init__(self,args):
         super().__init__(args=args)
+        self.args = args
         self._dataset = {}
         self._prompts = None
         self.load_dataset()
@@ -52,6 +53,22 @@ class ARC(BaseDatasetProcessor):
         return target + choices
 
     def combine_prompt(self):
+        if self.args.chat_mode:
+
+            cache_root = "experiments/cache/{dataset}/{settings}/{chat_mode}".format(
+                dataset=self.args.dataset,
+                settings = self.args.setting,
+                chat_mode = self.args.chat_mode
+            )
+        else:
+            cache_root = "experiments/cache/{dataset}/{settings}".format(
+                dataset=self.args.dataset,
+                settings = self.args.setting
+            )
+
+        if not os.path.exists(cache_root) or not os.path.isdir(cache_root):
+            # 如果不存在，则创建目录
+            os.makedirs(cache_root)
         for k,v in self._dataset.items():
             if k.startswith("ARC-c"):
                 prompt = self._prompts["arc-c"]
@@ -69,7 +86,7 @@ class ARC(BaseDatasetProcessor):
                     "metadata":cur_id
                 }
                 result.append(data)
-            with open("experiments/cache/{}.json".format(file_name),"w",encoding="utf-8") as ft:
+            with open(os.path.join(cache_root,"{}.json".format(file_name)),"w",encoding="utf-8") as ft:
                 json_data = json.dumps(result,ensure_ascii=False,indent=4)
                 ft.write(json_data)
 

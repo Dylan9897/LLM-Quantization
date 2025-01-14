@@ -17,6 +17,7 @@ class AGIEval(BaseDatasetProcessor):
         self.enc = tiktoken.encoding_for_model("gpt-4")
         self.load_dataset()
         self.load_prompts()
+        self.args = args
 
     def load_dataset(self):
         """
@@ -249,7 +250,19 @@ class AGIEval(BaseDatasetProcessor):
 
     def combine_prompt(self):
         target_path = "{}-chat".format(self.setting) if self.chat_mode else self.setting
-        cache_root = os.path.join("experiments/cache", target_path)
+        if self.args.chat_mode:
+
+            cache_root = "experiments/cache/{dataset}/{settings}/{chat_mode}".format(
+                dataset=self.args.dataset,
+                settings = self.args.setting,
+                chat_mode = self.args.chat_mode
+            )
+        else:
+            cache_root = "experiments/cache/{dataset}/{settings}".format(
+                dataset=self.args.dataset,
+                settings = self.args.setting
+            )
+       
         if not os.path.exists(cache_root) or not os.path.isdir(cache_root):
             # 如果不存在，则创建目录
             os.makedirs(cache_root)

@@ -97,7 +97,7 @@ Output:
                         "metadata": i
                     }
                 result.append(data)
-            with open("experiments/cache/{}.json".format(k), "w", encoding="utf-8") as ft:
+            with open("experiments/cache/{}/{}.json".format(self.dataset,k), "w", encoding="utf-8") as ft:
                 json_data = json.dumps(result, ensure_ascii=False, indent=4)
                 ft.write(json_data)
 
