@@ -33,7 +33,7 @@
   | **序号** | **数据集**                                                  | **论文**                             | **笔记**                               |
   | -------- | ----------------------------------------------------------- | ------------------------------------ | -------------------------------------- |
   | **1**    | [**AGIEval**](https://github.com/ruixiangcui/AGIEval)       | https://arxiv.org/pdf/2304.06364.pdf | [AGIEval.md](docs/datasets/AGIEval.md) |
-  | **2**    | [**CLUE**](https://github.com/CLUEbenchmark/CLUE)           | https://arxiv.org/pdf/2004.05986     | ##                                     |
+  | **2**    | [**CLUE**](https://github.com/CLUEbenchmark/CLUE)           | https://arxiv.org/pdf/2004.05986     | ##``                                   |
   | **3**    | [**SuperGLUE**](https://github.com/CLUEbenchmark/SuperCLUE) | https://arxiv.org/abs/2307.15020     | ##                                     |
   | **4**    | **ceval**                                                   | ##                                   | ##                                     |
   | **5**    | **ARC**                                                     | ##                                   | ##                                     |
