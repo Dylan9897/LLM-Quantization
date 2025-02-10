@@ -22,7 +22,10 @@
 #### 3. 快速开始
 
 - **安装指南**：列出如何安装依赖库或设置环境以运行本项目。
-- **运行说明**：提供简单的命令行指令来启动示例实验。
+
+- **运行说明**：
+
+  
 
 #### 4. 数据集
 
@@ -30,14 +33,14 @@
 
 - **获取方法**
 
-  | **序号** | **数据集**                                                  | **论文**                             | **笔记**                               |
+  | **序号** | **数据集**                                                  | **论文**                             | **数据集描述**                         |
   | -------- | ----------------------------------------------------------- | ------------------------------------ | -------------------------------------- |
   | **1**    | [**AGIEval**](https://github.com/ruixiangcui/AGIEval)       | https://arxiv.org/pdf/2304.06364.pdf | [AGIEval.md](docs/datasets/AGIEval.md) |
-  | **2**    | [**CLUE**](https://github.com/CLUEbenchmark/CLUE)           | https://arxiv.org/pdf/2004.05986     | ##``                                   |
-  | **3**    | [**SuperGLUE**](https://github.com/CLUEbenchmark/SuperCLUE) | https://arxiv.org/abs/2307.15020     | ##                                     |
-  | **4**    | **ceval**                                                   | ##                                   | ##                                     |
-  | **5**    | **ARC**                                                     | ##                                   | ##                                     |
-  | **6**    | **cmmlu**                                                   | ##                                   | ##                                     |
+  | **2**    | [**ARC**](https://opendatalab.com/OpenDataLab/ARC)          | https://arxiv.org/pdf/1803.05457v1   | [ARC.md](docs/datasets/ARC.md)         |
+  | **3**    | [**BBH**](https://github.com/suzgunmirac/BIG-Bench-Hard)    | https://arxiv.org/pdf/2210.09261v1   | [BBH.md](docs/datasets/BBH.md)         |
+  | **4**    | [**ceval**](https://github.com/hkust-nlp/ceval/tree/main)   | https://arxiv.org/pdf/2305.08322     | [ceval.md](docs/datasets/ceval.md)     |
+  | **5**    | [**CLUE**](https://github.com/CLUEbenchmark/CLUE)           | https://arxiv.org/pdf/2004.05986     | ##                                     |
+  | **6**    | [**SuperGLUE**](https://github.com/CLUEbenchmark/SuperCLUE) | https://arxiv.org/abs/2307.15020     | ##                                     |
   | **7**    | **commonsenseqa**                                           | ##                                   | ##                                     |
   | **8**    | **drop**                                                    | ##                                   | ##                                     |
   | **9**    | **FewCLUE**                                                 | ##                                   | ##                                     |
@@ -58,7 +61,7 @@
   | **24**   | **siqa**                                                    | ##                                   | ##                                     |
   | **25**   | **strategyqa**                                              | ##                                   | ##                                     |
   | **26**   | **summedits**                                               | ##                                   | ##                                     |
-  | **27**   | **BBH**                                                     | ##                                   | ##                                     |
+  | **27**   | **cmmlu**                                                   | ##                                   | ##                                     |
   | **28**   | **TheoremQA**                                               | ##                                   | ##                                     |
   | **29**   | **triviaqa**                                                | ##                                   | ##                                     |
   | **30**   | **tydiqa**                                                  | ##                                   | ##                                     |

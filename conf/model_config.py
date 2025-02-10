@@ -20,3 +20,9 @@ config = {
         }
     }
 }
+
+deep_zeek = {
+    "base_url":"https://api.deepseek.com",
+    "model_name":"deepseek-chat",
+    "api_key":"sk-27ec8639ef674a13a7e4c59febd23dfa"
+}
