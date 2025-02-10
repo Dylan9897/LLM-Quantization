@@ -133,13 +133,12 @@ class Evaluate():
                 k+=1
         return k/len(data)
 
-
-
     def evaluate(self,report=True):
         ## 获取预测的指标信息
         predict_data_root = "experiments/result/{}/{}".format(self.args.dataset,self.args.setting)
         file_list = os.listdir(predict_data_root)
         for file in file_list:
+
             file_name = file[:-5]
             file_path = os.path.join(predict_data_root,file)
             with open(file_path,'r',encoding="utf-8") as fl:
@@ -157,7 +156,6 @@ if __name__ == '__main__':
                         help="choose an reasoning mode ['GseRo']")
     args = parser.parse_args()
     func = Evaluate(args)
-    # func.main()
     func.evaluate()
 
 

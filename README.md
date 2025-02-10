@@ -11,100 +11,144 @@
 - [快速开始](#3-快速开始)
 - [数据集](#4-数据集)
 - [实验设置](#5-实验设置)
-- [量化算法](#6-量化算法)
-- [实验结果](#7-实验结果)
-- [文件结构](#8-文件结构)
-- [贡献者指南](9-贡献者指南)
-- [许可证](#10-许可证)
-- [致谢](#11-致谢)
-- [联系信息](#12-联系信息)
+- [实验结果](#6-实验结果)
+- [文件结构](#7-文件结构)
 
 #### 3. 快速开始
 
-- **安装指南**：列出如何安装依赖库或设置环境以运行本项目。
+- **安装指南**：
+
+  ```bash
+  pip install -r requirments.txt
+  ```
 
 - **运行说明**：
 
-  
+  运行
+
+  ```bash
+  python run.py --dataset="AGIEval" --setting="GseRo"
+  python run.py --dataset="ARC" --setting="GseRo"
+  python run.py --dataset="BBH" --setting="GseRo"
+  python run.py --dataset="ceval" --setting="GseRo"
+  ```
+
+  评估
+
+  ```bash
+  python eval.py --dataset="AGIEval" --setting="GseRo"
+  python eval.py --dataset="ARC" --setting="GseRo"
+  python eval.py --dataset="BBH" --setting="GseRo"
+  python eval.py --dataset="ceval" --setting="GseRo"
+  ```
 
 #### 4. 数据集
 
-- **概述**：列出所有使用的评测数据集（AGIEval, MMLU, CLUE, SuperGLUE等），并简单介绍每个数据集的特点。
+​	本项目采用了一系列与大模型相关的开源评测数据集进行性能评估，详细情况请参见下表：
 
-- **获取方法**
-
-  | **序号** | **数据集**                                                  | **论文**                             | **数据集描述**                         |
-  | -------- | ----------------------------------------------------------- | ------------------------------------ | -------------------------------------- |
-  | **1**    | [**AGIEval**](https://github.com/ruixiangcui/AGIEval)       | https://arxiv.org/pdf/2304.06364.pdf | [AGIEval.md](docs/datasets/AGIEval.md) |
-  | **2**    | [**ARC**](https://opendatalab.com/OpenDataLab/ARC)          | https://arxiv.org/pdf/1803.05457v1   | [ARC.md](docs/datasets/ARC.md)         |
-  | **3**    | [**BBH**](https://github.com/suzgunmirac/BIG-Bench-Hard)    | https://arxiv.org/pdf/2210.09261v1   | [BBH.md](docs/datasets/BBH.md)         |
-  | **4**    | [**ceval**](https://github.com/hkust-nlp/ceval/tree/main)   | https://arxiv.org/pdf/2305.08322     | [ceval.md](docs/datasets/ceval.md)     |
-  | **5**    | [**CLUE**](https://github.com/CLUEbenchmark/CLUE)           | https://arxiv.org/pdf/2004.05986     | ##                                     |
-  | **6**    | [**SuperGLUE**](https://github.com/CLUEbenchmark/SuperCLUE) | https://arxiv.org/abs/2307.15020     | ##                                     |
-  | **7**    | **commonsenseqa**                                           | ##                                   | ##                                     |
-  | **8**    | **drop**                                                    | ##                                   | ##                                     |
-  | **9**    | **FewCLUE**                                                 | ##                                   | ##                                     |
-  | **10**   | **flores_first100**                                         | ##                                   | ##                                     |
-  | **11**   | **GAOKAO-BENCH**                                            | ##                                   | ##                                     |
-  | **12**   | **gsm8k**                                                   | ##                                   | ##                                     |
-  | **13**   | **hellaswag**                                               | ##                                   | ##                                     |
-  | **14**   | **humaneval**                                               | ##                                   | ##                                     |
-  | **15**   | **lambada**                                                 | ##                                   | ##                                     |
-  | **16**   | **LCSTS**                                                   | ##                                   | ##                                     |
-  | **17**   | **math**                                                    | ##                                   | ##                                     |
-  | **18**   | **mbpp**                                                    | ##                                   | ##                                     |
-  | **19**   | **mmlu**                                                    | ##                                   | ##                                     |
-  | **20**   | **nq**                                                      | ##                                   | ##                                     |
-  | **21**   | **openbookqa**                                              | ##                                   | ##                                     |
-  | **22**   | **piqa**                                                    | ##                                   | ##                                     |
-  | **23**   | **race**                                                    | ##                                   | ##                                     |
-  | **24**   | **siqa**                                                    | ##                                   | ##                                     |
-  | **25**   | **strategyqa**                                              | ##                                   | ##                                     |
-  | **26**   | **summedits**                                               | ##                                   | ##                                     |
-  | **27**   | **cmmlu**                                                   | ##                                   | ##                                     |
-  | **28**   | **TheoremQA**                                               | ##                                   | ##                                     |
-  | **29**   | **triviaqa**                                                | ##                                   | ##                                     |
-  | **30**   | **tydiqa**                                                  | ##                                   | ##                                     |
-  | **31**   | **winogrande**                                              | ##                                   | ##                                     |
-  | **32**   | **xstory_cloze**                                            | ##                                   | ##                                     |
-  | **33**   | **Xsum**                                                    | ##                                   | ##                                     |
-
-  
+| **序号** | **数据集**                                                  | **论文**                             | **数据集描述**                         |
+| -------- | ----------------------------------------------------------- | ------------------------------------ | -------------------------------------- |
+| **1**    | [**AGIEval**](https://github.com/ruixiangcui/AGIEval)       | https://arxiv.org/pdf/2304.06364.pdf | [AGIEval.md](docs/datasets/AGIEval.md) |
+| **2**    | [**ARC**](https://opendatalab.com/OpenDataLab/ARC)          | https://arxiv.org/pdf/1803.05457v1   | [ARC.md](docs/datasets/ARC.md)         |
+| **3**    | [**BBH**](https://github.com/suzgunmirac/BIG-Bench-Hard)    | https://arxiv.org/pdf/2210.09261v1   | [BBH.md](docs/datasets/BBH.md)         |
+| **4**    | [**ceval**](https://github.com/hkust-nlp/ceval/tree/main)   | https://arxiv.org/pdf/2305.08322     | [ceval.md](docs/datasets/ceval.md)     |
+| **5**    | [**CLUE**](https://github.com/CLUEbenchmark/CLUE)           | https://arxiv.org/pdf/2004.05986     | ##                                     |
+| **6**    | [**SuperGLUE**](https://github.com/CLUEbenchmark/SuperCLUE) | https://arxiv.org/abs/2307.15020     | ##                                     |
+| **7**    | **commonsenseqa**                                           | ##                                   | ##                                     |
+| **8**    | **drop**                                                    | ##                                   | ##                                     |
+| **9**    | **FewCLUE**                                                 | ##                                   | ##                                     |
+| **10**   | **flores_first100**                                         | ##                                   | ##                                     |
+| **11**   | **GAOKAO-BENCH**                                            | ##                                   | ##                                     |
+| **12**   | **gsm8k**                                                   | ##                                   | ##                                     |
+| **13**   | **hellaswag**                                               | ##                                   | ##                                     |
+| **14**   | **humaneval**                                               | ##                                   | ##                                     |
+| **15**   | **lambada**                                                 | ##                                   | ##                                     |
+| **16**   | **LCSTS**                                                   | ##                                   | ##                                     |
+| **17**   | **math**                                                    | ##                                   | ##                                     |
+| **18**   | **mbpp**                                                    | ##                                   | ##                                     |
+| **19**   | **mmlu**                                                    | ##                                   | ##                                     |
+| **20**   | **nq**                                                      | ##                                   | ##                                     |
+| **21**   | **openbookqa**                                              | ##                                   | ##                                     |
+| **22**   | **piqa**                                                    | ##                                   | ##                                     |
+| **23**   | **race**                                                    | ##                                   | ##                                     |
+| **24**   | **siqa**                                                    | ##                                   | ##                                     |
+| **25**   | **strategyqa**                                              | ##                                   | ##                                     |
+| **26**   | **summedits**                                               | ##                                   | ##                                     |
+| **27**   | **cmmlu**                                                   | ##                                   | ##                                     |
+| **28**   | **TheoremQA**                                               | ##                                   | ##                                     |
+| **29**   | **triviaqa**                                                | ##                                   | ##                                     |
+| **30**   | **tydiqa**                                                  | ##                                   | ##                                     |
+| **31**   | **winogrande**                                              | ##                                   | ##                                     |
+| **32**   | **xstory_cloze**                                            | ##                                   | ##                                     |
+| **33**   | **Xsum**                                                    | ##                                   | ##                                     |
 
 #### 5. 实验设置
 
-- **硬件要求**：指明推荐的硬件配置。
-- **软件环境**：详细列出所需的软件包及其版本。
+- **硬件要求**：需配备NVIDIA GeForce RTX 4090显卡以确保最佳性能。
+- **软件环境**：请参考项目根目录下的`requirements.txt`文件来安装所有必要的软件依赖项。
 
-#### 6. 量化算法
+#### 6. 实验
 
-- **算法描述**：详细介绍项目中实现的不同量化算法（如int8, int4）。
-- **选择理由**：解释为什么选择了这些特定的量化技术。
+- DeepZeek
 
-#### 7. 实验结果
+  - 模型选择：DeepZeek-Chat
 
-- **性能指标**：展示关键的性能指标，比如准确率、推理速度等。
-- **图表与可视化**：使用图表或图形来直观地表示实验结果。
-- **笔记**：包含关于实验过程中的发现、挑战及解决方案的笔记。
+  - 实验设置：
 
-#### 8. 文件结构
+    - 使用GseRo方法来设计和调整提示词（prompt engineering），示例如下：
+
+      ```bash
+      --Goal--
+      这是一道关于注册会计师的题目，请按要求进行作答。
+      
+      --steps--
+      1. 分析、综合文本中的复杂信息。
+      2. 必要时借助外部知识帮助理解或推理。
+      3. 对需要多层次思考的问题提供深思熟虑的答案。
+      4. 对于每个问题，尽量找出解决问题所需的所有相关事实和条件。
+      5. 推理时，确保每一步都是合理且有理有据的。如果问题涉及非常专业的知识，尽量利用已知的信息做出最佳猜测。
+      6. 严格按照指定的格式 answer|A 输出答案
+      
+      ######################
+      --Examples--
+      ######################
+          question1: 甲公司是国内一家上市公司。甲公司对其各子公司实行全面预算管理，并通常使用增量预算方式进行战略控制，子公司预算需要经甲公司预算管理委员会批准后执行。2015年10月，甲公司投资了一个新的项目乙(子公司)。2015年11月，甲公司启动2016年度预算编制工作，此时甲公司应要求乙公司编制____。
+              options:
+              	(A) 增量预算  
+              	(B) 零基预算  
+              	(C) 固定预算  
+              	(D) 弹性预算
+              output:
+              	answer|B
+          question2: 债务人转让全部合同义务的，下列说法不正确的是____。
+              options:
+              	(A) 须债权人同意方可进行  
+              	(B) 新债务人可主张原债务人对债权人的抗辩  
+              	(C) 债务人转移债务的，原债务人对债权人享有债权的，新债务人可以向债权人主张抵销
+                  (D) 非专属于原债务人自身的从债务，一并转让给新债务人
+              output:
+              	answer|C
+      ######################
+      --Real Data--
+      ######################
+      	question: 下列关于税法基本原则的表述中，不正确的是____。
+      	options:
+              (A) 税收法定原则包括税收要件法定原则和税务合法性原则  
+              (B) 税收公平原则源于法律上的平等性原则  
+              (C) 税收效率原则包含经济效率和行政效率两个方面 
+              (D) 税务机关按法定程序依法征税，可以自由做出减征、停征或免征税款的决定
+      	output:
+      
+      ```
+
+    - 本次评估聚焦于两个核心指标：对指令的服从性及模型预测能力。
+
+  - 实验结果
+
+    
+
+
+#### 7. 文件结构
 
 - **目录结构**：给出项目的文件夹和文件组织方式。
 - **重要文件说明**：对一些核心文件的功能做简要说明。
-
-#### 9. 贡献者指南
-
-- **贡献规则**：鼓励社区成员参与，并提供贡献代码的方式。
-- **问题报告**：指导用户如何提交bug或者提出新特性请求。
-
-#### 10. 许可证
-
-- 指定项目的开源许可证类型。
-
-#### 11. 致谢
-
-- 列出任何帮助过项目的人或机构，以及所用资源的引用。
-
-#### 12. 联系信息
-
-- 提供维护者的联系方式或其他沟通渠道。
