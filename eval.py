@@ -53,7 +53,7 @@ class Evaluate():
         else:
             return None
 
-    def extrace_calculation(self,text):
+    def extract_calculation(self,text):
 
         pattern = r"answer\|(.*?)\n"
         match = re.search(pattern, text)
@@ -65,14 +65,15 @@ class Evaluate():
 
     def main(self):
         src_data_root = "experiments/cache/{}/{}".format(self.args.dataset,self.args.setting)
-        predict_data_root = "result2/{}/{}".format(self.args.dataset,self.args.setting)
+        predict_data_root = "experiments/result/{}/{}".format(self.args.dataset,self.args.setting)
+        if not os.path.exists(predict_data_root) or not os.path.isdir(predict_data_root):
+            # 如果不存在，则创建目录
+            os.makedirs(predict_data_root)
         target_df = self.df[self.df["dataset"]==self.args.dataset]
-        # print(target_df)
+
         src_data_list = os.listdir(src_data_root)
         for file in src_data_list:
             file_name = file[:-5]
-            if file_name == "math":
-                continue
             cur_df = target_df[target_df["data_file_name"]==file_name]
             types = list(cur_df["question_type"])[0]
 
@@ -80,6 +81,7 @@ class Evaluate():
                 with open(os.path.join(src_data_root, file), "r", encoding="utf-8") as fl2:
                     eval_data = json.load(fl)
                     src_data = json.load(fl2)
+
 
                     if types == "single_choice":
                         for i,elem in enumerate(eval_data):
@@ -93,17 +95,28 @@ class Evaluate():
                             src_data[i]["predict"] = elem
                             src_data[i]["predict_answer"] = cur_answer
 
-                    elif types =="calculation":
+                    elif types == "calculation":
                         for i, elem in enumerate(eval_data):
-                            cur_answer = self.extrace_calculation(elem)
+                            cur_answer = self.extract_calculation(elem)
                             src_data[i]["predict"] = elem
                             src_data[i]["predict_answer"] = cur_answer
 
+                    elif types == "judgement":
+                        for i, elem in enumerate(eval_data):
+                            cur_answer = self.extract_judgement(elem)
+                            src_data[i]["predict"] = elem
+                            src_data[i]["predict_answer"] = cur_answer
+
+                    elif types == "explanation":
+                        ...
+
+
+
                     else:
                         raise Exception("error")
-            with open(os.path.join(predict_data_root, file), "w", encoding="utf-8") as ft:
-                json_data = json.dumps(src_data,ensure_ascii=False,indent=4)
-                ft.write(json_data)
+            # with open(os.path.join(predict_data_root, file), "w", encoding="utf-8") as ft:
+            #     json_data = json.dumps(src_data,ensure_ascii=False,indent=4)
+            #     ft.write(json_data)
 
     def cal_Compliance(self,data):
         """
@@ -115,6 +128,7 @@ class Evaluate():
             if unit.get("predict_answer",None):
                 k+=1
         return k/len(data)
+
     def cal_Accuracy(self,data,file_name):
         """
         计算模型的准确率
@@ -141,10 +155,14 @@ class Evaluate():
 
             file_name = file[:-5]
             file_path = os.path.join(predict_data_root,file)
+            print(f"当前模型的文件为：{file_path}")
             with open(file_path,'r',encoding="utf-8") as fl:
                 data = json.load(fl)
                 compliance_result = self.cal_Compliance(data)
                 accuracy_result = self.cal_Accuracy(data,file_name)
+                print(compliance_result)
+                print(accuracy_result)
+                s = input()
 
 
 
@@ -156,6 +174,7 @@ if __name__ == '__main__':
                         help="choose an reasoning mode ['GseRo']")
     args = parser.parse_args()
     func = Evaluate(args)
+    func.main()
     func.evaluate()
 
 

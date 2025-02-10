@@ -45,7 +45,7 @@ class Model(ABC):
     def operate_result(self,params):
         result = []
         for output in params:
-       
+            print(output)
             generated_text = output.outputs[0].text
             result.append(generated_text)
         return result
