@@ -1,0 +1,21 @@
+import argparse
+
+parser = argparse.ArgumentParser(description="LLM reasoning and quantitative evaluation ...")
+parser.add_argument("--dataset", default="AGIEval", type=str)
+parser.add_argument("--quantize", default=None, type=str, help="choose an Quantization Algorithm:[inf8]")
+parser.add_argument("--prompt_type", default='GseRo', type=str, help="choose an instruction type")
+parser.add_argument("--chat_mode", default=False, type=bool, help="")
+parser.add_argument("--model_path", default="deep_zeek", type=str, help="choose an LLM model")
+parser.add_argument("--report", default=False, type=bool, help="Generate report or not")
+parser.add_argument("--batch_size", default=6, type=int, help="")
+parser.add_argument("--setting", default='', type=str,
+                    help="choose an reasoning mode ['few-shot','zero-shot','zero-shot-CoT','few-shot-CoT']")
+args = parser.parse_args()
+
+if __name__ == '__main__':
+    if args.dataset == "AGIEval":
+        from src.processor.AGIEvalProcessor import AGIEval
+        func = AGIEval(args)
+        func.combine_CseRo_prompt()
+
+

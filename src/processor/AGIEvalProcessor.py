@@ -1,3 +1,7 @@
+# encoding : utf-8 -*-                            
+# @author  : 冬瓜                              
+# @mail    : dylan_han@126.com    
+# @Time    : 2025/2/17 11:01
 import os
 import json
 import random
@@ -9,8 +13,8 @@ from src.processor import BaseDatasetProcessor,ChatGPTSchema
 from src.utils.utils import read_jsonl
 from src.utils.config import AGIEvalMappings
 from src.prompts import AGIEval as prompts_mapping
-
-
+from src.models.DeepZeek import Model
+from tqdm import tqdm
 class AGIEval(BaseDatasetProcessor):
     def __init__(self,args):
         super().__init__(args=args)
@@ -21,6 +25,7 @@ class AGIEval(BaseDatasetProcessor):
         self.load_dataset()
         self.load_prompts()
         self.args = args
+        self.model = Model()
 
     def load_dataset(self):
         """
@@ -47,285 +52,8 @@ class AGIEval(BaseDatasetProcessor):
         else:
             print(f"提示词文件不存在或未设置：{self.prompts_path}")
 
-
-    def convert_zero_shot(self,line,dataset_name):
-        try:
-            passage = line["passage"] if line["passage"] is not None else ""
-            if dataset_name in AGIEvalMappings["english_qa_datasets"]:
-                option_string = "ABCDEFG"
-                count = len(line["options"])
-                if count == 1:
-                    count = 5
-
-                return passage + "Q: " + line["question"] + " " \
-                    + "Answer Choices: " + " ".join(line["options"]) + "\n" + \
-                    "A: Among A through {}, the answer is".format(option_string[count - 1])
-
-
-            elif dataset_name in AGIEvalMappings["chinese_qa_datasets"]:
-                option_string = "ABCDEFG"
-                count = len(line["options"])
-                if count == 1:
-                    count = 4
-                return passage + "问题：" + line["question"] + " " \
-                    + "选项：" + " ".join(line["options"]) + "\n" + \
-                    "答案：从A到{}, 我们应选择".format(option_string[count - 1])
-
-            elif dataset_name in AGIEvalMappings["english_cloze_datasets"]:
-                return passage + "Q: " + line["question"] + "\n" \
-                                                            "A: The answer is"
-
-            elif dataset_name in AGIEvalMappings["chinese_cloze_datasets"]:
-                return passage + "问题：" + line["question"] + "\n" \
-                                                              "答案："
-        except NameError:
-            print("Dataset not defined.")
-
-    def convert_zero_shot_CoT_stage1(self,line, dataset_name):
-        try:
-            passage = line["passage"] if line["passage"] is not None else ""
-            if dataset_name in AGIEvalMappings["english_qa_datasets"]:
-                return passage + "Q: " + line["question"] + " " \
-                    + "Answer Choices: " + " ".join(line["options"]) + "\n" + \
-                    "Let's think step by step."
-
-            elif dataset_name in AGIEvalMappings["chinese_qa_datasets"]:
-                option_string = "ABCDEFG"
-                count = len(line["options"])
-                if count == 1:
-                    count = 4
-                return passage + "问题：" + line["question"] + " " \
-                    + "选项：" + " ".join(line["options"]) + "\n" + \
-                    "从A到{}, 我们应选择什么？让我们逐步思考：".format(option_string[count - 1])
-
-            elif dataset_name in AGIEvalMappings["english_cloze_datasets"]:
-                return passage + "Q: " + line["question"] + "\n" \
-                                                            "A: Let's think step by step."
-
-            elif dataset_name in AGIEvalMappings["chinese_cloze_datasets"]:
-                return passage + "问题：" + line["question"] + "\n" \
-                                                              "答案：让我们逐步思考："
-        except NameError:
-            print("Dataset not defined.")
-
-
-    def concat_prompt(self,dataset_name):
-        load_explanation = self.setting == 'few-shot-CoT'
-        chat_mode = self.chat_mode
-        skip_passage = False
-        if dataset_name == 'sat-en-without-passage':
-            skip_passage = True
-            dataset_name = "sat-en"
-        demostrations = []
-        # read the prompts by context and explanation
-        context_row = [0, 1, 3, 5, 7, 9]
-        # 解释
-        explanation_row = [0, 2, 4, 6, 8, 10]
-
-        # saamples 行
-        raw_prompts_context = pd.read_csv(self._prompts, header=0, skiprows=lambda x: x not in context_row,
-                                          keep_default_na=False)
-
-        # explan 行
-        raw_prompts_explanation = pd.read_csv(self._prompts, header=0, skiprows=lambda x: x not in explanation_row,
-                                              keep_default_na=False).replace(r'\n\n', '\n', regex=True)
-
-        contexts = []
-        for line in list(raw_prompts_context[dataset_name]):
-            if line:
-                contexts.append(ast.literal_eval(line))
-
-        ##################################################
-
-        explanations = [exp for exp in raw_prompts_explanation[dataset_name] if exp]
-        for idx, (con, exp) in enumerate(zip(contexts, explanations)):
-            passage = con["passage"] if con["passage"] is not None and not skip_passage else ""
-            question = con["question"]
-            options = con["options"] if con["options"] is not None else ""
-            label = con["label"] if con["label"] is not None else ""
-            answer = con["answer"] if "answer" in con and con["answer"] is not None else ""
-
-            if dataset_name in AGIEvalMappings["english_qa_datasets"]:
-                question_input = "Problem {}.   ".format(idx + 1) + passage + " " + question + "\n" \
-                                 + "Choose from the following options:    " + " ".join(options) + "\n"
-                question_output = (("Explanation for Problem {}:   ".format(
-                    idx + 1) + exp + "\n") if load_explanation else "") \
-                                  + "The answer is therefore {}".format(label)
-
-            elif dataset_name in AGIEvalMappings["chinese_qa_datasets"]:
-                question_input = "问题 {}.   ".format(idx + 1) + passage + " " + question + "\n" \
-                                 + "从以下选项中选择:    " + " ".join(options) + "\n"
-                question_output = (("问题 {}的解析:   ".format(idx + 1) + exp + "\n") if load_explanation else "") \
-                                  + "答案是 {}".format(label)
-
-            elif dataset_name in AGIEvalMappings["english_cloze_datasets"]:
-                question_input = "Problem {}.   ".format(idx + 1) + question + "\n"
-                question_output = (("Explanation for Problem {}:   ".format(
-                    idx + 1) + exp + "\n") if load_explanation else "") \
-                                  + "The answer is therefore {}".format(answer)
-
-            elif dataset_name in AGIEvalMappings["chinese_cloze_datasets"]:
-                question_input = "问题 {}.   ".format(idx + 1) + question + "\n"
-                question_output = (("问题 {}的解析:   ".format(idx + 1) + exp + "\n") if load_explanation else "") \
-                                  + "答案是 {}".format(answer)
-            else:
-                raise ValueError(f"During loading few-sot examples, found unknown dataset: {dataset_name}")
-            if chat_mode:
-                demostrations.append((question_input, question_output))
-            else:
-                demostrations.append(question_input + question_output + '\n')
-
-        return demostrations
-
-    def concat_prompt_chat_mode(self,demos, dataset_name, max_tokens, end_of_example="\n", verbose=False):
-        answers = []
-        sentences = ""
-        for i in range(len(demos)):
-            answers += [
-                {"role": "user", "content": demos[i][0]},
-                {"role": "assistant", "content": demos[i][1]},
-            ]
-            sentences += json.dumps(answers[-1])
-            # break if reach max token limit
-            if len(self.enc.encode(sentences)) > max_tokens:
-                answers.pop()
-                answers.pop()
-                break
-        if verbose:
-            print("max_tokens set as ", max_tokens, "actual_tokens is", len(self.enc.encode(sentences)), "num_shot is",
-                  len(answers) // 2)
-        return answers, len(answers) // 2
-
-    def concat_data_prompt(self,demos, dataset_name, max_tokens, end_of_example="\n", verbose=False):
-        demostration_en = "Here are the answers for the problems in the exam.\n"
-        demostration_zh = "以下是考试中各个问题的答案。\n"
-
-        for i in range(len(demos)):
-            # print(len(enc.encode(demostration_en)), len(enc.encode(demostration_zh)))
-            if dataset_name in AGIEvalMappings["english_qa_datasets"]:
-                demostration_en = demostration_en + demos[i] + end_of_example
-            elif dataset_name in AGIEvalMappings["chinese_qa_datasets"]:
-                demostration_zh = demostration_zh + demos[i] + end_of_example
-            elif dataset_name in AGIEvalMappings["english_cloze_datasets"]:
-                demostration_en = demostration_en + demos[i] + end_of_example
-            elif dataset_name in AGIEvalMappings["chinese_cloze_datasets"]:
-                demostration_zh = demostration_zh + demos[i] + end_of_example
-            # break if reach max token limit
-            if len(self.enc.encode(demostration_en)) < max_tokens and len(self.enc.encode(demostration_zh)) < max_tokens:
-                output = demostration_en if len(demostration_en) > len(demostration_zh) else demostration_zh
-                prompt_num = i + 1
-            else:
-                break
-        if verbose:
-            print("max_tokens set as ", max_tokens, "actual_tokens is", len(self.enc.encode(output)), "num_shot is",
-                  prompt_num)
-        return output, prompt_num
-
-    def convert_few_shot(self,line, dataset_name, demo, n_shot, chat_mode=False):
-        passage = line["passage"] if line["passage"] is not None else ""
-        question = line["question"]
-        options = line["options"] if line["options"] is not None else ""
-
-        if dataset_name in AGIEvalMappings["english_qa_datasets"]:
-            question_input = "Problem {}.   ".format(n_shot + 1) + passage + " " + question + "\n" \
-                             + "Choose from the following options:    " + " ".join(options) + "\n"
-            # + "Explanation for Problem {}:   ".format(n_shot + 1)
-
-        if dataset_name in AGIEvalMappings["chinese_qa_datasets"]:
-            question_input = "问题 {}.   ".format(n_shot + 1) + passage + " " + question + "\n" \
-                             + "从以下选项中选择:    " + " ".join(options) + "\n"
-            # + "问题 {}的解析:   ".format(n_shot + 1)
-
-        if dataset_name in AGIEvalMappings["english_cloze_datasets"]:
-            question_input = "Problem {}.   ".format(n_shot + 1) + question + "\n"
-            # + "Explanation for Problem {}:   ".format(n_shot + 1)
-
-        if dataset_name in AGIEvalMappings["chinese_cloze_datasets"]:
-            question_input = "问题 {}.   ".format(n_shot + 1) + question + "\n"
-            # + "问题 {}的解析:   ".format(n_shot + 1)
-        if chat_mode:
-            return demo + [
-                {"role": "user", "content": question_input},
-            ]
-        else:
-            return demo + question_input
-
-
-    def combine_prompt(self):
-        target_path = "{}-chat".format(self.setting) if self.chat_mode else self.setting
-        if self.args.chat_mode:
-
-            cache_root = "experiments/cache/{dataset}/{settings}/{chat_mode}".format(
-                dataset=self.args.dataset,
-                settings = self.args.setting,
-                chat_mode = self.args.chat_mode
-            )
-        else:
-            cache_root = "experiments/cache/{dataset}/{settings}".format(
-                dataset=self.args.dataset,
-                settings = self.args.setting
-            )
-       
-        if not os.path.exists(cache_root) or not os.path.isdir(cache_root):
-            # 如果不存在，则创建目录
-            os.makedirs(cache_root)
-        else:
-            # 如果目录已经存在，则跳过创建
-            print(f"Directory '{cache_root}' already exists, skipping creation.")
-        if self.setting == "zero-shot":
-            for dataset_name,datas in self._dataset.items():
-                processed = []
-                for meta_idx,line in enumerate(datas):
-                    ctxt = self.convert_zero_shot(line,dataset_name)
-                    new_instance = ChatGPTSchema(context=ctxt,dataset_name=dataset_name,metadata = meta_idx)
-
-                    processed.append(new_instance.to_dict())
-                self._dataset[dataset_name]=processed
-                with open(os.path.join(cache_root,"{}.json".format(dataset_name)),"w",encoding="utf-8") as ft:
-                    json_data = json.dumps(processed,ensure_ascii=False,indent=4)
-                    ft.write(json_data)
-
-
-        elif self.setting == "zero-shot-CoT":
-            for dataset_name, datas in self._dataset.items():
-                processed = []
-                for meta_idx, line in enumerate(datas):
-                    ctxt = self.convert_zero_shot_CoT_stage1(line, dataset_name)
-                    new_instance = ChatGPTSchema(context=ctxt, dataset_name=dataset_name, metadata=meta_idx)
-
-                    processed.append(new_instance.to_dict())
-                self._dataset[dataset_name] = processed
-                with open(os.path.join(cache_root,"{}.json".format(dataset_name)),"w",encoding="utf-8") as ft:
-                    json_data = json.dumps(processed,ensure_ascii=False,indent=4)
-                    ft.write(json_data)
-
-        else:
-            
-            for dataset_name, datas in self._dataset.items():
-                processed_demos = self.concat_prompt(dataset_name)
-                if self.chat_mode:
-                    chosen_prompt, n_shot = self.concat_prompt_chat_mode(
-                        processed_demos, dataset_name, max_tokens=2048, end_of_example="<END>\n", verbose=False)
-
-                else:
-                    chosen_prompt, n_shot = self.concat_data_prompt(
-                        processed_demos, dataset_name, max_tokens=2048, end_of_example="<END>\n", verbose=False)
-                processed = []
-                for meta_idx, line in enumerate(datas):
-                    ctxt = self.convert_few_shot(line, dataset_name, chosen_prompt, n_shot, self.chat_mode)
-                    new_instance = ChatGPTSchema(context=ctxt, dataset_name=dataset_name, metadata=meta_idx)
-
-                    processed.append(new_instance.to_dict())
-
-                self._dataset[dataset_name] = processed
-
-                with open(os.path.join(cache_root, "{}.json".format(dataset_name)), "w", encoding="utf-8") as ft:
-                    json_data = json.dumps(processed, ensure_ascii=False, indent=4)
-                    ft.write(json_data)
-
-
     def concat_CseRo_prompt(self,dataset_name):
-        load_explanation = self.setting == 'few-shot-CoT'
+        load_explanation = self.setting == 'GseRo'
         chat_mode = self.chat_mode
         skip_passage = False
         if dataset_name == 'sat-en-without-passage':
@@ -465,7 +193,6 @@ class AGIEval(BaseDatasetProcessor):
         return prefix + question_input
 
     def combine_CseRo_prompt(self):
-
         cache_root = "experiments/cache/AGIEval/GseRo"
 
         if not os.path.exists(cache_root) or not os.path.isdir(cache_root):
@@ -478,15 +205,25 @@ class AGIEval(BaseDatasetProcessor):
         for dataset_name, datas in self._dataset.items():
             processed = []
             processed_demos = self.concat_CseRo_prompt(dataset_name)
-
-            for meta_idx, line in enumerate(datas):
+            for meta_idx, line in enumerate(tqdm(datas,desc=dataset_name)):
                 ctxt = self.convert_CseRo_few_shot(processed_demos,line, dataset_name)
                 new_instance = ChatGPTSchema(context=ctxt, dataset_name=dataset_name, metadata=meta_idx)
+                new_instance=new_instance.to_dict()
+                new_instance["answer"] = line.get("answer","")
+                new_instance["label"] = line["label"]
 
-                processed.append(new_instance.to_dict())
+                i = 0
+                while i < 3:
+                    # api 不稳定，最多可重复三次
+                    model_output = self.model.infer(new_instance["context"])
+                    if model_output != None:
+                        break
+                    i+=1
+
+                new_instance["model_output"] = model_output if model_output != None else "error"
+                processed.append(new_instance)
 
             self._dataset[dataset_name] = processed
-
             with open(os.path.join(cache_root, "{}.json".format(dataset_name)), "w", encoding="utf-8") as ft:
                 json_data = json.dumps(processed, ensure_ascii=False, indent=4)
                 ft.write(json_data)

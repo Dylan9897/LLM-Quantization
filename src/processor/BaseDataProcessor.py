@@ -28,7 +28,7 @@ class BaseDatasetProcessor:
 
     def dataset_config(self):
         self.config = configparser.ConfigParser()
-        self.config.read("src/dataset.ini", encoding="utf-8")
+        self.config.read("conf/dataset.ini", encoding="utf-8")
 
     def __repr__(self):
         return (f"{self.__class__.__name__}(dataset={self.dataset!r}, "

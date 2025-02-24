@@ -24,5 +24,11 @@ config = {
 deep_zeek = {
     "base_url":"https://dashscope.aliyuncs.com/compatible-mode/v1",
     "model_name":"deepseek-v3",
-    "api_key":"sk-61c89dcd76b743f88df3bc8a15946e10"
+    # "api_key":"sk-61c89dcd76b743f88df3bc8a15946e10"
+    "api_key":"sk-6c5aab6a003c468895382dda81654a86"
 }
+# deep_zeek = {
+#     "base_url":"https://api.deepseek.com",
+#     "model_name":"deepseek-chat",
+#     "api_key":"sk-f4ce8609fc90460ebf82619a6922c664"
+# }
