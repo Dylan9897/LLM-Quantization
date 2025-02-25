@@ -3,26 +3,24 @@
 # @mail    : dylan_han@126.com    
 # @Time    : 2025/1/22 15:11
 from openai import OpenAI
-# import sys
-# sys.path.append("/mnt/e/Github/ai-nlp-project-new/")
 from conf.model_config import deep_zeek
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
 
 class Model():
     def __init__(self):
         self.client = OpenAI(api_key=deep_zeek["api_key"], base_url=deep_zeek["base_url"])
 
     def infer(self,input_data):
-        response = self.client.chat.completions.create(
-            model=deep_zeek["model_name"],
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant"},
-                {"role": "user", "content": input_data},
-            ],
-            stream=False
-        )
+        
         try:
+            response = self.client.chat.completions.create(
+                model=deep_zeek["model_name"],
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant"},
+                    {"role": "user", "content": input_data},
+                ],
+                stream=False
+            )
             return response.choices[0].message.content
         except:
             return None
@@ -49,25 +47,3 @@ class Model():
 
         return results
 
-    def stream_infer(self,completion):
-        for chunk in completion:
-            if not chunk.choices:
-                print("\nUsage:")
-                print(chunk.usage)
-            else:
-                delta = chunk.choices[0].delta
-                if hasattr(delta, 'reasoning_content') and delta.reasoning_content is not None:
-                    # yield f"data: {delta.reasoning_content}\n\n"
-                    print(f"data: {delta.reasoning_content}\n\n")
-                else:
-                    if delta.content != "":
-                        # yield f"data: {delta.content}\n\n"
-                        print(f"data: {delta.content}\n\n")
-
-
-
-if __name__ == '__main__':
-
-    model = Model()
-    input_data = "窗前明月光"
-    print(model.infer(input_data))

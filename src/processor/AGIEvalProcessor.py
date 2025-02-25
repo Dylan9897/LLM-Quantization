@@ -203,6 +203,9 @@ class AGIEval(BaseDatasetProcessor):
             print(f"Directory '{cache_root}' already exists, skipping creation.")
 
         for dataset_name, datas in self._dataset.items():
+
+            if "{}.json".format(dataset_name) in os.listdir(cache_root):
+                continue
             processed = []
             processed_demos = self.concat_CseRo_prompt(dataset_name)
             for meta_idx, line in enumerate(tqdm(datas,desc=dataset_name)):
