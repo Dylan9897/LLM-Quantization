@@ -4,8 +4,7 @@
 # @Time    : 2025/2/26 17:20
 import json
 import os
-from src.processor import BaseDatasetProcessor,ChatGPTSchema
-from src.utils.utils import read_jsonl,read_txt
+from src.processor import BaseDatasetProcessor
 from src.models.DeepZeek import Model
 from tqdm import tqdm
 
