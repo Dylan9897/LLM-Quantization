@@ -1,7 +1,7 @@
 import argparse
 
 parser = argparse.ArgumentParser(description="LLM reasoning and quantitative evaluation ...")
-parser.add_argument("--dataset", default="ARC", type=str)
+parser.add_argument("--dataset", default="BBH", type=str)
 parser.add_argument("--quantize", default=None, type=str, help="choose an Quantization Algorithm:[inf8]")
 parser.add_argument("--prompt_type", default='GseRo', type=str, help="choose an instruction type")
 parser.add_argument("--chat_mode", default=False, type=bool, help="")
@@ -21,6 +21,11 @@ if __name__ == '__main__':
     elif args.dataset == "ARC":
         from src.processor.ARCProcessor import ARC
         func = ARC(args)
+        func.combine_CseRo_prompt()
+
+    elif args.dataset == "BBH":
+        from src.processor.BBHProcessor import BBH
+        func = BBH(args)
         func.combine_CseRo_prompt()
 
     
