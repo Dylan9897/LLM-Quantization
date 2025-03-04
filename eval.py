@@ -4,7 +4,7 @@ import os
 import json
 import pandas as pd
 from tqdm import tqdm
-from src.models.DeepZeek import Model
+from src.models.Model import Model
 from src.utils.logger import logger
 
 class Evaluate():
@@ -68,7 +68,17 @@ class Evaluate():
         else:
             return None
 
-           
+    def extract_judgement(self,text):
+        text = text.replace("\n", "")
+        pattern = r"answer\|(False|True|Yes|No)"
+        match = re.search(pattern, text)
+        if match:
+            answer = match.group(1)  # 提取出的答案，不包括 'answer|' 和 '\n'
+            return answer
+        else:
+            return None
+
+
     def evaluate(self,report=True):
         ## 获取预测的指标信息
         predict_data_root = "experiments/cache/{}/{}".format(self.args.dataset,self.args.setting)
@@ -134,11 +144,12 @@ class Evaluate():
                         raise Exception("error")
 
             logger.info(f"file name is {file_name}, accuracy is {accuracy/len(data)}, compliance is {compliance/len(data)}")
+            s = input("push ...")
 
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description="LLM reasoning and quantitative evaluation ...")
-    parser.add_argument("--dataset", default="AGIEval", type=str)
+    parser.add_argument("--dataset", default="BBH", type=str)
     parser.add_argument("--setting", default='GseRo', type=str,
                         help="choose an reasoning mode ['GseRo']")
     args = parser.parse_args()

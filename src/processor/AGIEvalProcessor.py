@@ -13,7 +13,7 @@ from src.processor import BaseDatasetProcessor,ChatGPTSchema
 from src.utils.utils import read_jsonl
 from src.utils.config import AGIEvalMappings
 from src.prompts import AGIEval as prompts_mapping
-from src.models.DeepZeek import Model
+from src.models.Model import Model
 from tqdm import tqdm
 class AGIEval(BaseDatasetProcessor):
     def __init__(self,args):

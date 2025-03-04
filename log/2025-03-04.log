@@ -1,0 +1,219 @@
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/accountant.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is accountant, accuracy is 0.7755102040816326, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/advanced_mathematics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is advanced_mathematics, accuracy is 0.6842105263157895, compliance is 0.9473684210526315
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/art_studies.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is art_studies, accuracy is 0.8787878787878788, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/basic_medicine.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is basic_medicine, accuracy is 0.8421052631578947, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/business_administration.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is business_administration, accuracy is 0.8181818181818182, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/chinese_language_and_literature.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is chinese_language_and_literature, accuracy is 0.7391304347826086, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/civil_servant.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is civil_servant, accuracy is 0.7446808510638298, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/clinical_medicine.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is clinical_medicine, accuracy is 0.7727272727272727, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/college_chemistry.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is college_chemistry, accuracy is 0.7916666666666666, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/college_economics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is college_economics, accuracy is 0.7454545454545455, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/college_physics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is college_physics, accuracy is 0.7894736842105263, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/college_programming.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is college_programming, accuracy is 0.9459459459459459, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/computer_architecture.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is computer_architecture, accuracy is 1.0, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/computer_network.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is computer_network, accuracy is 0.8421052631578947, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/discrete_mathematics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is discrete_mathematics, accuracy is 0.625, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/education_science.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is education_science, accuracy is 0.8620689655172413, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/electrical_engineer.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is electrical_engineer, accuracy is 0.6486486486486487, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/environmental_impact_assessment_engineer.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is environmental_impact_assessment_engineer, accuracy is 0.8387096774193549, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/fire_engineer.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is fire_engineer, accuracy is 0.8387096774193549, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_biology.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is high_school_biology, accuracy is 0.8947368421052632, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_chemistry.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is high_school_chemistry, accuracy is 0.8421052631578947, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_chinese.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is high_school_chinese, accuracy is 0.7368421052631579, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_geography.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is high_school_geography, accuracy is 0.9473684210526315, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_history.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is high_school_history, accuracy is 0.9, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_mathematics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is high_school_mathematics, accuracy is 0.5, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_physics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is high_school_physics, accuracy is 0.8947368421052632, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_politics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is high_school_politics, accuracy is 1.0, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/ideological_and_moral_cultivation.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is ideological_and_moral_cultivation, accuracy is 0.9473684210526315, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/law.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is law, accuracy is 0.7916666666666666, compliance is 0.9583333333333334
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/legal_professional.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is legal_professional, accuracy is 0.8695652173913043, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/logic.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is logic, accuracy is 0.9090909090909091, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/mao_zedong_thought.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is mao_zedong_thought, accuracy is 0.9583333333333334, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/marxism.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is marxism, accuracy is 0.9473684210526315, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/metrology_engineer.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is metrology_engineer, accuracy is 0.9166666666666666, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_biology.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is middle_school_biology, accuracy is 0.9047619047619048, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_chemistry.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is middle_school_chemistry, accuracy is 0.95, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_geography.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is middle_school_geography, accuracy is 0.9166666666666666, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_history.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is middle_school_history, accuracy is 0.9545454545454546, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_mathematics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is middle_school_mathematics, accuracy is 0.8947368421052632, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_physics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is middle_school_physics, accuracy is 0.9473684210526315, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_politics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is middle_school_politics, accuracy is 0.9523809523809523, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/modern_chinese_history.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is modern_chinese_history, accuracy is 0.9130434782608695, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/operating_system.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is operating_system, accuracy is 0.7894736842105263, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/physician.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is physician, accuracy is 0.8571428571428571, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/plant_protection.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is plant_protection, accuracy is 0.9545454545454546, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/probability_and_statistics.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is probability_and_statistics, accuracy is 0.6666666666666666, compliance is 0.9444444444444444
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/professional_tour_guide.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is professional_tour_guide, accuracy is 0.9655172413793104, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/sports_science.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is sports_science, accuracy is 0.8947368421052632, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/tax_accountant.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is tax_accountant, accuracy is 0.7755102040816326, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/teacher_qualification.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is teacher_qualification, accuracy is 0.9090909090909091, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/urban_and_rural_planner.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is urban_and_rural_planner, accuracy is 0.8260869565217391, compliance is 1.0
+2025-03-04 20:02:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/veterinary_medicine.json, 类型为：single_choice
+2025-03-04 20:02:46 | INFO | file name is veterinary_medicine, accuracy is 0.9565217391304348, compliance is 1.0
+2025-03-04 20:04:33 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/accountant.json, 类型为：single_choice
+2025-03-04 20:04:33 | INFO | file name is accountant, accuracy is 0.7755102040816326, compliance is 1.0
+2025-03-04 20:05:19 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/advanced_mathematics.json, 类型为：single_choice
+2025-03-04 20:05:19 | INFO | file name is advanced_mathematics, accuracy is 0.6842105263157895, compliance is 0.9473684210526315
+2025-03-04 20:06:00 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/art_studies.json, 类型为：single_choice
+2025-03-04 20:06:00 | INFO | file name is art_studies, accuracy is 0.8787878787878788, compliance is 1.0
+2025-03-04 20:06:20 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/basic_medicine.json, 类型为：single_choice
+2025-03-04 20:06:20 | INFO | file name is basic_medicine, accuracy is 0.8421052631578947, compliance is 1.0
+2025-03-04 20:06:37 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/business_administration.json, 类型为：single_choice
+2025-03-04 20:06:37 | INFO | file name is business_administration, accuracy is 0.8181818181818182, compliance is 1.0
+2025-03-04 20:06:54 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/chinese_language_and_literature.json, 类型为：single_choice
+2025-03-04 20:06:54 | INFO | file name is chinese_language_and_literature, accuracy is 0.7391304347826086, compliance is 1.0
+2025-03-04 20:07:30 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/civil_servant.json, 类型为：single_choice
+2025-03-04 20:07:30 | INFO | file name is civil_servant, accuracy is 0.7446808510638298, compliance is 1.0
+2025-03-04 20:08:04 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/clinical_medicine.json, 类型为：single_choice
+2025-03-04 20:08:04 | INFO | file name is clinical_medicine, accuracy is 0.7727272727272727, compliance is 1.0
+2025-03-04 20:08:27 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/college_chemistry.json, 类型为：single_choice
+2025-03-04 20:08:27 | INFO | file name is college_chemistry, accuracy is 0.7916666666666666, compliance is 1.0
+2025-03-04 20:08:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/college_economics.json, 类型为：single_choice
+2025-03-04 20:08:46 | INFO | file name is college_economics, accuracy is 0.7454545454545455, compliance is 1.0
+2025-03-04 20:09:29 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/college_physics.json, 类型为：single_choice
+2025-03-04 20:09:29 | INFO | file name is college_physics, accuracy is 0.7894736842105263, compliance is 1.0
+2025-03-04 20:09:49 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/college_programming.json, 类型为：single_choice
+2025-03-04 20:09:49 | INFO | file name is college_programming, accuracy is 0.9459459459459459, compliance is 1.0
+2025-03-04 20:10:34 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/computer_architecture.json, 类型为：single_choice
+2025-03-04 20:10:34 | INFO | file name is computer_architecture, accuracy is 1.0, compliance is 1.0
+2025-03-04 20:10:45 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/computer_network.json, 类型为：single_choice
+2025-03-04 20:10:45 | INFO | file name is computer_network, accuracy is 0.8421052631578947, compliance is 1.0
+2025-03-04 20:10:56 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/discrete_mathematics.json, 类型为：single_choice
+2025-03-04 20:10:56 | INFO | file name is discrete_mathematics, accuracy is 0.625, compliance is 1.0
+2025-03-04 20:11:04 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/education_science.json, 类型为：single_choice
+2025-03-04 20:11:04 | INFO | file name is education_science, accuracy is 0.8620689655172413, compliance is 1.0
+2025-03-04 20:11:30 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/electrical_engineer.json, 类型为：single_choice
+2025-03-04 20:11:30 | INFO | file name is electrical_engineer, accuracy is 0.6486486486486487, compliance is 1.0
+2025-03-04 20:11:53 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/environmental_impact_assessment_engineer.json, 类型为：single_choice
+2025-03-04 20:11:53 | INFO | file name is environmental_impact_assessment_engineer, accuracy is 0.8387096774193549, compliance is 1.0
+2025-03-04 20:12:08 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/fire_engineer.json, 类型为：single_choice
+2025-03-04 20:12:08 | INFO | file name is fire_engineer, accuracy is 0.8387096774193549, compliance is 1.0
+2025-03-04 20:12:35 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_biology.json, 类型为：single_choice
+2025-03-04 20:12:35 | INFO | file name is high_school_biology, accuracy is 0.8947368421052632, compliance is 1.0
+2025-03-04 20:13:00 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_chemistry.json, 类型为：single_choice
+2025-03-04 20:13:00 | INFO | file name is high_school_chemistry, accuracy is 0.8421052631578947, compliance is 1.0
+2025-03-04 20:13:12 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_chinese.json, 类型为：single_choice
+2025-03-04 20:13:12 | INFO | file name is high_school_chinese, accuracy is 0.7368421052631579, compliance is 1.0
+2025-03-04 20:13:28 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_geography.json, 类型为：single_choice
+2025-03-04 20:13:28 | INFO | file name is high_school_geography, accuracy is 0.9473684210526315, compliance is 1.0
+2025-03-04 20:13:43 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_history.json, 类型为：single_choice
+2025-03-04 20:13:43 | INFO | file name is high_school_history, accuracy is 0.9, compliance is 1.0
+2025-03-04 20:13:52 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_mathematics.json, 类型为：single_choice
+2025-03-04 20:13:52 | INFO | file name is high_school_mathematics, accuracy is 0.5, compliance is 1.0
+2025-03-04 20:14:03 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_physics.json, 类型为：single_choice
+2025-03-04 20:14:03 | INFO | file name is high_school_physics, accuracy is 0.8947368421052632, compliance is 1.0
+2025-03-04 20:14:17 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/high_school_politics.json, 类型为：single_choice
+2025-03-04 20:14:17 | INFO | file name is high_school_politics, accuracy is 1.0, compliance is 1.0
+2025-03-04 20:14:46 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/ideological_and_moral_cultivation.json, 类型为：single_choice
+2025-03-04 20:14:46 | INFO | file name is ideological_and_moral_cultivation, accuracy is 0.9473684210526315, compliance is 1.0
+2025-03-04 20:15:29 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/law.json, 类型为：single_choice
+2025-03-04 20:15:29 | INFO | file name is law, accuracy is 0.7916666666666666, compliance is 0.9583333333333334
+2025-03-04 20:15:48 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/legal_professional.json, 类型为：single_choice
+2025-03-04 20:15:48 | INFO | file name is legal_professional, accuracy is 0.8695652173913043, compliance is 1.0
+2025-03-04 20:16:14 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/logic.json, 类型为：single_choice
+2025-03-04 20:16:14 | INFO | file name is logic, accuracy is 0.9090909090909091, compliance is 1.0
+2025-03-04 20:16:26 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/mao_zedong_thought.json, 类型为：single_choice
+2025-03-04 20:16:26 | INFO | file name is mao_zedong_thought, accuracy is 0.9583333333333334, compliance is 1.0
+2025-03-04 20:16:44 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/marxism.json, 类型为：single_choice
+2025-03-04 20:16:44 | INFO | file name is marxism, accuracy is 0.9473684210526315, compliance is 1.0
+2025-03-04 20:16:57 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/metrology_engineer.json, 类型为：single_choice
+2025-03-04 20:16:57 | INFO | file name is metrology_engineer, accuracy is 0.9166666666666666, compliance is 1.0
+2025-03-04 20:17:38 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_biology.json, 类型为：single_choice
+2025-03-04 20:17:38 | INFO | file name is middle_school_biology, accuracy is 0.9047619047619048, compliance is 1.0
+2025-03-04 20:17:59 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_chemistry.json, 类型为：single_choice
+2025-03-04 20:17:59 | INFO | file name is middle_school_chemistry, accuracy is 0.95, compliance is 1.0
+2025-03-04 20:18:17 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_geography.json, 类型为：single_choice
+2025-03-04 20:18:17 | INFO | file name is middle_school_geography, accuracy is 0.9166666666666666, compliance is 1.0
+2025-03-04 20:18:33 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_history.json, 类型为：single_choice
+2025-03-04 20:18:33 | INFO | file name is middle_school_history, accuracy is 0.9545454545454546, compliance is 1.0
+2025-03-04 20:18:47 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_mathematics.json, 类型为：single_choice
+2025-03-04 20:18:47 | INFO | file name is middle_school_mathematics, accuracy is 0.8947368421052632, compliance is 1.0
+2025-03-04 20:19:03 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_physics.json, 类型为：single_choice
+2025-03-04 20:19:03 | INFO | file name is middle_school_physics, accuracy is 0.9473684210526315, compliance is 1.0
+2025-03-04 20:19:32 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/middle_school_politics.json, 类型为：single_choice
+2025-03-04 20:19:32 | INFO | file name is middle_school_politics, accuracy is 0.9523809523809523, compliance is 1.0
+2025-03-04 20:20:18 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/modern_chinese_history.json, 类型为：single_choice
+2025-03-04 20:20:18 | INFO | file name is modern_chinese_history, accuracy is 0.9130434782608695, compliance is 1.0
+2025-03-04 20:20:43 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/operating_system.json, 类型为：single_choice
+2025-03-04 20:20:43 | INFO | file name is operating_system, accuracy is 0.7894736842105263, compliance is 1.0
+2025-03-04 20:21:16 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/physician.json, 类型为：single_choice
+2025-03-04 20:21:16 | INFO | file name is physician, accuracy is 0.8571428571428571, compliance is 1.0
+2025-03-04 20:30:23 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/plant_protection.json, 类型为：single_choice
+2025-03-04 20:30:23 | INFO | file name is plant_protection, accuracy is 0.9545454545454546, compliance is 1.0
+2025-03-04 20:30:56 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/probability_and_statistics.json, 类型为：single_choice
+2025-03-04 20:30:56 | INFO | file name is probability_and_statistics, accuracy is 0.6666666666666666, compliance is 0.9444444444444444
+2025-03-04 20:31:27 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/professional_tour_guide.json, 类型为：single_choice
+2025-03-04 20:31:27 | INFO | file name is professional_tour_guide, accuracy is 0.9655172413793104, compliance is 1.0
+2025-03-04 20:31:45 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/sports_science.json, 类型为：single_choice
+2025-03-04 20:31:45 | INFO | file name is sports_science, accuracy is 0.8947368421052632, compliance is 1.0
+2025-03-04 20:32:05 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/tax_accountant.json, 类型为：single_choice
+2025-03-04 20:32:05 | INFO | file name is tax_accountant, accuracy is 0.7755102040816326, compliance is 1.0
+2025-03-04 20:32:17 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/teacher_qualification.json, 类型为：single_choice
+2025-03-04 20:32:17 | INFO | file name is teacher_qualification, accuracy is 0.9090909090909091, compliance is 1.0
+2025-03-04 20:32:28 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/urban_and_rural_planner.json, 类型为：single_choice
+2025-03-04 20:32:28 | INFO | file name is urban_and_rural_planner, accuracy is 0.8260869565217391, compliance is 1.0
+2025-03-04 20:32:41 | INFO | 当前模型的文件为：experiments/cache/ceval/GseRo/veterinary_medicine.json, 类型为：single_choice
+2025-03-04 20:32:41 | INFO | file name is veterinary_medicine, accuracy is 0.9565217391304348, compliance is 1.0
+2025-03-04 20:35:49 | INFO | 当前模型的文件为：experiments/cache/BBH/GseRo/boolean_expressions.json, 类型为：judgement
+2025-03-04 20:41:52 | INFO | 当前模型的文件为：experiments/cache/BBH/GseRo/boolean_expressions.json, 类型为：judgement
+2025-03-04 20:41:52 | INFO | file name is boolean_expressions, accuracy is 0.692, compliance is 0.7
+2025-03-04 20:41:57 | INFO | 当前模型的文件为：experiments/cache/BBH/GseRo/causal_judgement.json, 类型为：judgement
+2025-03-04 20:41:57 | INFO | file name is causal_judgement, accuracy is 0.0, compliance is 0.0
+2025-03-04 20:42:51 | INFO | 当前模型的文件为：experiments/cache/BBH/GseRo/boolean_expressions.json, 类型为：judgement
+2025-03-04 20:42:51 | INFO | file name is boolean_expressions, accuracy is 0.692, compliance is 0.7
+2025-03-04 20:42:51 | INFO | 当前模型的文件为：experiments/cache/BBH/GseRo/causal_judgement.json, 类型为：judgement
+2025-03-04 20:42:51 | INFO | file name is causal_judgement, accuracy is 0.18716577540106952, compliance is 0.2620320855614973
+2025-03-04 20:42:53 | INFO | 当前模型的文件为：experiments/cache/BBH/GseRo/date_understanding.json, 类型为：single_choice
+2025-03-04 20:42:53 | INFO | file name is date_understanding, accuracy is 0.0, compliance is 0.0

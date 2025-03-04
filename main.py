@@ -28,4 +28,8 @@ if __name__ == '__main__':
         func = BBH(args)
         func.combine_CseRo_prompt()
 
+    elif args.dataset == "ceval":
+        from src.processor.CevalProcessor import CEVAL
+        func = CEVAL(args)
+        func.combine_CseRo_prompt()
     

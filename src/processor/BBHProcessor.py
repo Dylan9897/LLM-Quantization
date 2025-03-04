@@ -5,7 +5,7 @@
 import json
 import os
 from src.processor import BaseDatasetProcessor
-from src.models.DeepZeek import Model
+from src.models.Model import Model
 from tqdm import tqdm
 
 class BBH(BaseDatasetProcessor):

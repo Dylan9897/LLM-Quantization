@@ -5,7 +5,7 @@
 from loguru import logger
 
 # 定义日志文件路径格式，使用{time}占位符来生成基于时间的文件名
-log_file_path = "log/asr_{time:YYYY-MM-DD}.log"
+log_file_path = "log/{time:YYYY-MM-DD}.log"
 
 # 添加sink，配置日志输出格式、轮换策略和保留策略
 logger.add(
