@@ -63,7 +63,7 @@ class ARC(BaseDatasetProcessor):
     def combine_CseRo_prompt(self):
         cache_root = "experiments/cache/{dataset}/{settings}".format(
             dataset=self.args.dataset,
-            settings=self.args.setting
+            settings=self.args.prompt_type
         )
         if not os.path.exists(cache_root) or not os.path.isdir(cache_root):
             # 如果不存在，则创建目录
